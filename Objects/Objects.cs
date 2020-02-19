@@ -18,4 +18,8 @@ namespace Objects
         //    return 0;
         //}
     }
+    public interface IHandler
+    {
+        //List<object> CreateQuestions();
+    }
 }
