@@ -1,0 +1,51 @@
+﻿Things to do when making a new module
+Handler:
+Make a Create Questions method whereby you make and return a list of the type of object; It is in this method where you declare the data
+Write Test Methods Using the naming convention ObjectA() etc
+Change OBJECT and #...
+
+            List < OBJECT > objct = CreateQuestions();
+            OBJECT Last = new OBJECT(0);
+            while (true)
+            {
+                objct.Sort();
+                OBJECT Question = objct[rnd.Next(5)];
+                while (Question._name == Last._name) { Question = objct[rnd.Next(5)]; }
+                Console.WriteLine(#Ask a question using a couple of the parameters);
+                Console.ReadLine();
+                Console.WriteLine(#Output the answer);
+
+                string ans = Console.ReadLine();
+                if (ans == "l") break;
+                Question.Score = GetMark(ans);
+
+                Last = Question;
+                Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n"); ;
+            }
+            objct.Sort();
+            foreach (OBJECT i in objct) { Console.WriteLine(#A property of the class + "  " + #Another property + "\t\t\t\t\t Correct: " + i.Score[0] + " Wrong: " + i.Score[1]); }
+            Console.WriteLine("\nPress enter to return to main menu.");
+            Console.ReadLine();
+            PrintOptions();
+
+
+
+
+Data:
+Must Inherit from Data parent class
+Must use Icomparable thats been tailored for the new object(ie swap the word object for the class name):
+
+        public int CompareTo(OBJECT other)
+        {
+            if (other.Score[1] - other.Score[0] > this.Score[1] - this.Score[0]) { return 1; }
+            if (other.Score[1] - other.Score[0] < this.Score[1] - this.Score[0]) { return -1; }
+            if (other.Score[1] - other.Score[0] == this.Score[1] - this.Score[0]) { return 0; }
+            return 0;
+        }
+
+Declare all properties of a class at the start with public and _something naming convention
+Create an initializer to write to each property
+
+
+
+REMEMBER TO ADD THE NEW CLASS TO THE PRINTOPTIONS AND TO ADD A NEW CASE FOR IT IN THE PROGRAM.CS FILE

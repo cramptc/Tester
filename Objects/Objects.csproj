@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Objects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QualitativeAnalysis.cs" />
     <Compile Include="Synthetic Routes.cs" />
     <Compile Include="Transition Metals.cs" />
   </ItemGroup>

@@ -1,0 +1,6 @@
+C:\Users\Chris Crampton\Documents\GitHub\Tester\Objects\bin\Release\Objects.dll
+C:\Users\Chris Crampton\Documents\GitHub\Tester\Objects\bin\Release\Objects.pdb
+C:\Users\Chris Crampton\Documents\GitHub\Tester\Objects\obj\Release\Objects.csprojAssemblyReference.cache
+C:\Users\Chris Crampton\Documents\GitHub\Tester\Objects\obj\Release\Objects.csproj.CoreCompileInputs.cache
+C:\Users\Chris Crampton\Documents\GitHub\Tester\Objects\obj\Release\Objects.dll
+C:\Users\Chris Crampton\Documents\GitHub\Tester\Objects\obj\Release\Objects.pdb

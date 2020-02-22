@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Objects
 {
-    public class Complex : ITestable, IComparable<Complex>
+    public class Complex : Data, IComparable<Complex>
     {
         public int _oxstate;
         public string _name;
@@ -14,7 +14,7 @@ namespace Objects
         public string _colour;
         public int _charge;
         public string _metal;
-        int[] score = new int[2] { 0, 0 };
+
         public Complex(int oxs, string metal, string name, string state, string colour, int charge)
         {
             _metal = metal;
@@ -23,8 +23,9 @@ namespace Objects
             _state = state;
             _colour = colour;
             _charge = charge;
+
         }
-        public int[] Score { get { return score; } set { score[0] += value[0]; score[1] += value[1]; } }
+
         public int CompareTo(Complex other)
         {
             if (other.Score[1] - other.Score[0] > this.Score[1] - this.Score[0]) { return 1; }
@@ -33,37 +34,38 @@ namespace Objects
             return 0;
         }
     }
-    public class TMetalHandler:IHandler
-    {
-        Random rnd = new Random();
+    public class TMetalHandler : AlphaHandler { 
         public List<Complex> CreateQuestions()
         {
-            List<Complex> cmplx = new List<Complex> { };
-            cmplx.Add(new Complex(2, "Fe", "Fe", "aq", "Pale Green", 2));
-            cmplx.Add(new Complex(2, "Fe", "Fe(OH)2", "s", "Dirty Green", 0));
-            cmplx.Add(new Complex(3, "Fe", "Fe", "aq", "Yellow", 3));
-            cmplx.Add(new Complex(3, "Fe", "Fe(OH)3", "s", "Red/Brown", 0));
-            cmplx.Add(new Complex(3, "Fe", "FeSCN", "aq", "Blood Red", 2));
+            List<Complex> cmplx = new List<Complex>
+            {
+                //         Oxs  Metal  Ion Name     State     Colour                        Charge
+                new Complex(2, "Fe", "Fe",          "aq",   "Pale Green",                    2),
+                new Complex(2, "Fe", "Fe(OH)2",     "s",    "Dirty Green",                   0),
+                new Complex(3, "Fe", "Fe",          "aq",   "Yellow",                        3),
+                new Complex(3, "Fe", "Fe(OH)3",     "s",    "Brown",                         0),
+                new Complex(3, "Fe", "FeSCN",       "aq",   "Blood Red",                     2),
+                new Complex(2, "Cu", "Cu",          "aq",   "Blue",                          2),
+                new Complex(2, "Cu", "CuCl4",       "aq",   "Yellow/Green(Equilibrium)",    -2),
+                new Complex(2, "Cu", "Cu(NH3)4",    "aq",   "Deep Blue",                     2),
+                new Complex(2, "Cu", "Cu(OH)2",     "s",    "Pale Blue",                     0),
+                new Complex(3, "Cr", "Cr",          "aq",   "Green",                         3),
+                new Complex(3, "Cr", "Cr(OH)6",     "aq",   "Green",                        -3),
+                new Complex(3, "Cr", "Cr(NH3)6",    "aq",   "Purple",                        3),
+                new Complex(3, "Cr", "Cr(OH)3",     "s",    "Green",                         0),
+                new Complex(6, "Cr", "Cr2O7",       "aq",   "Orange",                       -2),
+                new Complex(2, "Co", "Co",          "aq",   "Pink",                          2),
+                new Complex(2, "Co", "Co(NH3)6",    "aq",   "Pale Yellow",                   2),
+                new Complex(2, "Co", "CoCl4",       "aq",   "Deep Blue",                    -2),
+                new Complex(7, "Mn", "MnO4",        "aq",   "Purple",                       -1),
+                new Complex(2, "Mn", "Mn",          "aq",   "Pale Pink",                     2),
+                new Complex(2, "Mn", "Mn(OH)2",     "s",    "Pale Pink --> Brown",           0),
+                new Complex(4, "Mn", "MnO2",        "s",    "Black",                         0)
+            };
             //cmplx.Add(new Complex(0, "Cu", "Cu", "s", "Brown", 0));
             //cmplx.Add(new Complex(1, "Cu", "CuI", "s", "White", 0));
             //cmplx.Add(new Complex(1, "Cu", "CuCl", "s", "White", 0));
             //cmplx.Add(new Complex(1, "Cu", "(Cu)2(SO4)", "s", "White", 0));
-            cmplx.Add(new Complex(2, "Cu", "Cu", "aq", "Blue", 2));
-            cmplx.Add(new Complex(2, "Cu", "CuCl4", "aq", "Yellow/Green(Equilibrium)", -2));
-            cmplx.Add(new Complex(2, "Cu", "Cu(NH3)4", "aq", "Deep Blue", 2));
-            cmplx.Add(new Complex(2, "Cu", "Cu(OH)2", "s", "Pale Blue", 0));
-            cmplx.Add(new Complex(3, "Cr", "Cr", "aq", "Green", 3));
-            cmplx.Add(new Complex(3, "Cr", "Cr(OH)6", "aq", "Deep Green", -3));
-            cmplx.Add(new Complex(3, "Cr", "Cr(NH3)6", "aq", "Violet", 3));
-            cmplx.Add(new Complex(3, "Cr", "Cr(OH)3", "aq", "Pale Green", 0));
-            cmplx.Add(new Complex(6, "Cr", "Cr2O7", "aq", "Orange", -2));
-            cmplx.Add(new Complex(2, "Co", "Co", "aq", "Pink", 2));
-            cmplx.Add(new Complex(2, "Co", "Co(NH3)6", "aq", "Pale Yellow", 2));
-            cmplx.Add(new Complex(2, "Co", "CoCl4", "aq", "Deep Blue", -2));
-            cmplx.Add(new Complex(6, "Mn", "MnO4", "aq", "Green", -2));
-            cmplx.Add(new Complex(7, "Mn", "MnO4", "aq", "Purple", -1));
-            cmplx.Add(new Complex(2, "Mn", "Mn", "aq", "Pale Pink", 2));
-            cmplx.Add(new Complex(2, "Mn", "Mn(OH)2", "aq", "Pale Brown", 2));
             return cmplx;
         }
 
@@ -73,24 +75,25 @@ namespace Objects
             Complex Last = new Complex(0, "", "", "", "", 0);
             while (true)
             {
-                int[] mark = new int[2] { 0, 0 };
                 cmplx.Sort();
                 Complex Question = cmplx[rnd.Next(5)];
                 while (Question._name == Last._name) { Question = cmplx[rnd.Next(5)]; }
-                Console.WriteLine(Question._name + " Oxidation State: " + Question._oxstate + " Charge: " + Question._charge);
+                Console.WriteLine("Ion: \t\t\t" + Question._name + "\nOxidation State: \t" + Question._oxstate + "\nCharge: \t\t" + Question._charge);
                 Console.ReadLine();
-                Console.WriteLine(Question._colour + "  " + Question._state);
+                Console.WriteLine("Colour: \t\t" + Question._colour + "\nState: \t\t\t" + Question._state);
+
                 string ans = Console.ReadLine();
-                if (ans == "l") { break; }
-                if (ans != "") { if (Convert.ToInt16(ans) == 1) { mark[0] = 1; } }
-                else { mark[1] = 1; }
-                Question.Score = mark;
+                if (ans == "l") break;
+                Question.Score = GetMark(ans);
+
                 Last = Question;
-                Console.WriteLine();
+                Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n"); ;
             }
             cmplx.Sort();
-            foreach (Complex i in cmplx) { Console.WriteLine(i._name + "  " + i._oxstate + "                  Correct: " + i.Score[0] + " Wrong: " + i.Score[1]); }
+            foreach (Complex i in cmplx) { Console.WriteLine(i._name + "  " + i._oxstate + "\t\t\t\t\t Correct: " + i.Score[0] + " Wrong: " + i.Score[1]); }
+            Console.WriteLine("\nPress enter to return to main menu.");
             Console.ReadLine();
+            PrintOptions();
 
         }
 
@@ -100,24 +103,24 @@ namespace Objects
             Complex Last = new Complex(0, "", "", "", "", 0);
             while (true)
             {
-                int[] mark = new int[2] { 0, 0 };
                 cmplx.Sort();
                 Complex Question = cmplx[rnd.Next(5)];
                 while (Question._name == Last._name) { Question = cmplx[rnd.Next(5)]; }
-                Console.WriteLine(Question._colour + " " + Question._state + "   " + Question._metal);
+                Console.WriteLine("Colour: \t\t" + Question._colour + "\nState: \t\t\t" + Question._state + "\nMetal: \t\t\t" + Question._metal);
                 Console.ReadLine();
-                Console.WriteLine(Question._name + "  " + Question._charge);
+                Console.WriteLine("Ion: \t\t\t" + Question._name + "\nCharge: \t\t" + Question._charge);
+
                 string ans = Console.ReadLine();
-                if (ans == "l") { break; }
-                if (ans != "") { if (Convert.ToInt16(ans) == 1) { mark[0] = 1; } }
-                else { mark[1] = 1; }
-                Question.Score = mark;
-                Console.WriteLine();
+                if (ans == "l") break;
+                Question.Score = GetMark(ans);
+
+                Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n");
                 Last = Question;
             }
             cmplx.Sort();
-            foreach (Complex i in cmplx) { Console.WriteLine(i._name + "  " + i._oxstate + "                  Correct: " + i.Score[0] + " Wrong: " + i.Score[1]); }
+            foreach (Complex i in cmplx) { Console.WriteLine(i._name + "  " + i._oxstate + "\t\t\t\t\t Correct: " + i.Score[0] + " Wrong: " + i.Score[1]); }
             Console.ReadLine();
+            PrintOptions();
 
         }
     }
