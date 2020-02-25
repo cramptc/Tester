@@ -29,10 +29,11 @@ namespace Objects
             List<QTests> qtests = new List<QTests>
             {
                 new QTests("Cl-","Add nitric Acid (removes CO3- ions as AgCO3 forms white ppt), Add silver nitrate","White ppt forms","Soluble in dillute NH3"),
-                new QTests("Br-","Add nitric Acid (removes CO3- ions as AgCO3 forms white ppt), Add silver nitrate","Cream ppt forms","Soluble in Conc NH3"),
-                new QTests("I-","Add nitric Acid (removes CO3- ions as AgCO3 forms white ppt), Add silver nitrate","Yellow ppt forms","Insoluble in Conc NH3"),
-                new QTests("","","",""),
-
+            new QTests("Br-", "Add nitric Acid (removes CO3- ions as AgCO3 forms white ppt), Add silver nitrate", "Cream ppt forms", "Soluble in Conc NH3"),
+            new QTests("I-", "Add nitric Acid (removes CO3- ions as AgCO3 forms white ppt), Add silver nitrate", "Yellow ppt forms", "Insoluble in Conc NH3"),
+            new QTests("CO3 2-", "Add Strong Acid to sample, Collect the gas produced, Test gas for CO2", "Effervescence, Cloudy Limewater", ""),
+            new QTests("SO4 2-","Add dilute hydrohloric acid and barium sulphate","White ppt forms",""),
+            new QTests("NH4+","Add sodium hydroxide and boil, test the gas produced with red litmus paper","Turns red litmus paper blue","Smells Pungent")
             };
             return qtests;
         }
