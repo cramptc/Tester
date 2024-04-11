@@ -1,2 +1,2 @@
 # Tester
- Program designed to help me not screw up my A-levels.
+Short command line tester to aid memoristation of transition metal observable properties
